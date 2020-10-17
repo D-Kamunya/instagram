@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url,include
-from users import views
+from users import views as user_views
+from django.contrib.auth import views 
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url('^',include('feed.urls')),
-    url(r'^accounts/register',views.register_user,name='register_user' ),
+    url(r'',include('feed.urls')),
+    url(r'^accounts/register',user_views.register_user,name='register_user' ),
     url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^logout/$', views.logout, {"next_page": '/'}),
 ]
