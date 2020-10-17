@@ -33,7 +33,7 @@ class Profile(models.Model):
       '''
       Returns profile based on user id
       '''
-      profile=cls.objects.filter(user_id=userid)
+      profile=cls.objects.get(user=userid)
       return profile
 
 
@@ -42,5 +42,5 @@ class Profile(models.Model):
       '''
       Deletes profile based on user id
       '''
-      cls.objects.filter(user_id=userid).delete()    
+      cls.objects.get(user_id=userid).delete()    
 
