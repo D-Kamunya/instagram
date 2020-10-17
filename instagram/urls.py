@@ -19,7 +19,7 @@ from users import views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url('',include('feed.urls')),
+    url('^',include('feed.urls')),
     url(r'^accounts/register',views.register_user,name='register_user' ),
     url(r'^accounts/', include('registration.backends.simple.urls')),
 ]

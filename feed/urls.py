@@ -3,6 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    url('', views.home_page,name='home_page'),
+    url('^$', views.home_page,name='home_page'),
 ]
 
