@@ -1,41 +1,28 @@
 {%extends "registration/base.html"%}
 {% load bootstrap3 %}
 {% block content %}
-<div class="container">
-  <div class="row">
-    <!-- Empty div -->
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      {% if form.errors %}
-        <p> Password or Username is incorrect </p>
-      {% endif %}
-      <div class="panel panel-default">
-
-        <div class="panel-heading">
-          <h3 class="text-center">Sign In</h3>
-        </div>
-        <div class="panel-body">
-
-          <form  action="/accounts/login/" method="post">
-            {% csrf_token %}
-            {% bootstrap_form form%}
-
-            <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Login">
-            </div>
-
-            <input type="hidden" name="next" value="{{next}}">
-
-          </form>
-
-        </div>
-
-      </div>
-
+<section id="content">
+  <form  action="/accounts/login/" method="post">
+    <h2 class="text-center">Instagram</h2>
+    {% csrf_token %}
+    {% bootstrap_form form%}
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary btn-sm" value="Login">
     </div>
-    <!-- empty div -->
-    <div class="col-md-4"></div>
-  </div>
+    <input type="hidden" name="next" value="{{next}}">
+  </form>
+  <h6 class="text-center"> <a  href="">Forgot password?</a></h6>
+</section>
+<div id = "no_account">
+    <h4>Don't have an account?<a href="{% url 'register_user' %}"> Sign up</a></h4>
 </div>
+<div id="get_app">
+  <h3>Get the app.</h3>
+</div>
+<div id="photos">
+    <a href="https://itunes.apple.com/app/instagram/id389801252?mt=8" target="_blank"><img src="http://gtpie.com/wp-content/uploads/2015/07/appStoreIcon.png" width="127" height="40"></a>
+    <a href="https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26utm_medium%3Dbadge" target="_blank"><img src="http://www.codecu.org/Images/2016_05_googlePlay.png" width="127" height="40"></a>
+</div>
+
 
 {% endblock %}
