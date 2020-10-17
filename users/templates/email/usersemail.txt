@@ -1,0 +1,3 @@
+Hello {{name}}
+
+Welcome to Instagram Clone. Follow users to see their posts on your feeds

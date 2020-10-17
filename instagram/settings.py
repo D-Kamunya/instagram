@@ -11,6 +11,15 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from decouple import config
+
+
+# Email configurations remember to install python-decouple
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -72,8 +81,8 @@ TEMPLATES = [
 ]
 
 UPLOADCARE = {
-    'pub_key': '2589e8f428bee8821699',
-    'secret': 'c3156527247abdc0f16e',
+    'pub_key': config("PUB_KEY"),
+    'secret': config("SECRET"),
 }
 
 WSGI_APPLICATION = 'instagram.wsgi.application'
@@ -85,9 +94,9 @@ WSGI_APPLICATION = 'instagram.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'instagram',
-        'USER': os.environ.get("db_user"),
-        'PASSWORD': os.environ.get("db_pass")
+        'NAME': config("DB_NAME"),
+        'USER': config("DB_USER"),
+        'PASSWORD': config("DB_PASSWORD")
     }
 }
 
