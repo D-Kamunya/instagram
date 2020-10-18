@@ -13,10 +13,8 @@ class ProfileTestClass(TestCase):
         self.new_user= User(username='denno',email='test@gmail.com',password='moringa#23')
         self.new_user.save()
 
-        self.new_profile=Profile(user=self.new_user)
-        self.new_profile.save_profile()
-
-
+        self.new_profile=Profile.get_profile_by_userid(self.new_user.id)
+        
     # Tear Down method
     def tearDown(self):
         Profile.objects.all().delete()
@@ -35,8 +33,7 @@ class ProfileTestClass(TestCase):
     def test_get_all_profiles_method(self):
         self.new_user1= User(username='dennoi',email='testt@gmail.com',password='moringa#23')
         self.new_user1.save()
-        self.new_profile1=Profile(user=self.new_user1)
-        self.new_profile1.save_profile()
+  
         profiles = Profile.get_all_profiles()
         self.assertTrue(len(profiles) == 2)
 
