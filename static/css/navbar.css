@@ -1,0 +1,10 @@
+.navbar-brand h2{
+  font-weight: 600;
+  font-family: "Tangerine";
+}
+@media (min-width: 992px){
+  .navbar-expand-lg{
+    padding-left: 15vw;
+    padding-right: 15vw;
+  }
+}
