@@ -14,7 +14,7 @@
         {%endif%}
         <a class="text-dark" href=""><b class="ml-5">{{ profile.user.username }}</b></a>
         <small class="float-right">
-            <a class='follow-btn btn mr-2' href="">Follow</a>
+            <a class='follow-btn btn mr-2' href="/users/add/following/{{profile.user_id}}">Follow</a>
         </small>
       </li>
     {% endfor %}
