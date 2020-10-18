@@ -10,7 +10,7 @@ from friendship.models import Friend, Follow, Block
 # Create your views here.
 
 def get_not_following(request):
-  all_profiles=Profile.get_all_profiles()
+  all_profiles=Profile.get_all_profiles(request.user)
   following=Follow.objects.following(request.user)
   following_id=[]
   for followin in following:

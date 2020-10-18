@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="card my-5">
+  <div class="card-body">
+    {%if not_following%}  
+    <ul class="list-group list-group-flush">
+    {% for profile in not_following %}
+    
+      <li class="list-group-item">
+        {%if profile.profile_photo%}
+          <img src="{{profile.profile_photo.cdn_url}}" class="rounded-circle z-depth-0" alt="avatar image" height="35">
+        {%else%}
+          <img src="https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" class="rounded-circle z-depth-0" alt="avatar image" height="35">
+        {%endif%}
+        <a class="text-dark" href=""><b class="ml-5">{{ profile.user.username }}</b></a>
+        <small class="float-right">
+            <a class='follow-btn btn mr-2' href="">Follow</a>
+        </small>
+      </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <h5><i>No new people to add now! Please come back later!</i></h5>
+    {% endif %}
+  </div>
+</div>
+  
+{%endblock%}

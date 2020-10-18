@@ -34,8 +34,8 @@ class ProfileTestClass(TestCase):
         self.new_user1= User(username='dennoi',email='testt@gmail.com',password='moringa#23')
         self.new_user1.save()
   
-        profiles = Profile.get_all_profiles()
-        self.assertTrue(len(profiles) == 2)
+        profiles = Profile.get_all_profiles(self.new_user)
+        self.assertTrue(len(profiles) == 1)
 
 
     # Testing get_profile_by_userid Method
@@ -47,7 +47,7 @@ class ProfileTestClass(TestCase):
     # Testing delete method
     def test_delete_profile(self):
         Profile.delete_profile(self.new_profile.id)
-        profiles = Profile.get_all_profiles()
+        profiles = Profile.get_all_profiles(self.new_user)
         self.assertTrue(len(profiles) == 0)
 
 

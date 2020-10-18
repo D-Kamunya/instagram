@@ -1,0 +1,12 @@
+@media (min-width: 992px){
+  .instagram-body{
+    padding-left: 7vw;
+    padding-right: 7vw;
+  }
+}
+.follow-btn{
+  color: rgb(247, 119, 83);
+  background-color: transparent !important;
+  border: 2px solid rgb(247, 119, 83) !important;
+  border-radius: 10rem;
+}

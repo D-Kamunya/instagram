@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'bootstrap3',
     'pyuploadcare.dj',
-    'friendship'
 ]
 
 MIDDLEWARE = [

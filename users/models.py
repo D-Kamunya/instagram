@@ -22,11 +22,11 @@ class Profile(models.Model):
 
 
     @classmethod
-    def get_all_profiles(cls):
+    def get_all_profiles(cls,current_user):
       '''
       Returns all profile objects from db
       '''
-      profiles=cls.objects.all()
+      profiles=cls.objects.exclude(user=current_user)
       return profiles 
 
 
