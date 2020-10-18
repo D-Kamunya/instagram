@@ -8,5 +8,7 @@ from users.models import Profile
 def home_page(request):
   
   profile=Profile.get_profile_by_userid(request.user.id)
-  print(profile.user.username)
-  return render(request,'feed/home.html',{'profile':profile})
+  context={
+    'profile':profile
+  }
+  return render(request,'feed/home.html',context)
