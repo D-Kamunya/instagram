@@ -4,6 +4,14 @@
     padding-right: 7vw;
   }
 }
+.instagram-body{
+  margin-top: 3rem;
+}
+
+.new_image label:nth-child(2){
+  display: none;
+}
+
 .follow-btn{
   color: rgb(247, 119, 83);
   background-color: transparent !important;
