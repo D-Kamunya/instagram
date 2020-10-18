@@ -8,7 +8,7 @@ from .models import Profile
 from django.contrib.auth.models import User
 from friendship.models import Friend, Follow, Block
 # Create your views here.
-
+@login_required(login_url='/accounts/login/')
 def get_not_following(request):
   all_profiles=Profile.get_all_profiles(request.user)
   following=Follow.objects.following(request.user)
@@ -54,8 +54,18 @@ def not_following(request):
   return render(request, 'users/not_following.html', context) 
 
 
-
+@login_required(login_url='/accounts/login/')
 def  add_following(request,follow_id):
   following_user=User.objects.get(pk=follow_id)
   Follow.objects.add_follower(request.user, following_user)
   return redirect('not_following')
+
+
+
+@login_required(login_url='/accounts/login/')
+def my_profile(request):
+  profile=request.user.profile
+  context={
+    'profile':profile
+  }
+  return render(request, 'users/my_profile.html',context)
