@@ -7,7 +7,7 @@
         <div class="posts row">
           {%for post in following_posts%}
           <div class="mx-auto mb-2 col-md-4 col-lg-3 col-sm-12">
-            <a class="post" href="{{post.image_path.cdn_url}}">
+            <a class="post" href="/feed/post/{{post.id}}">
               <img style="min-height:160px ;" class="image img-fluid" src="{{post.image_path.cdn_url}}">
               <span class="d-flex justify-content-between details">
                 <span ><i class="mr-1 far fa-heart"></i>{{post.likes}}</span><br>
@@ -71,8 +71,8 @@
       </div>
       <div class="card col-4 mb-3 mx-auto">
         <div class="card-body">
-          <p class="card-text">CREATE POST</p>
-          <a href="{%url 'new_post'%}" class="btn btn-primary">CREATE POSTS</a>
+          <p class="card-text">Upload new post</p>
+          <a href="{%url 'new_post'%}" class="btn btn-primary">CREATE POST</a>
         </div>
       </div>
     </div>
