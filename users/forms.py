@@ -33,5 +33,5 @@ class EditProfileForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['user','bio']
+        exclude = ['user']
  

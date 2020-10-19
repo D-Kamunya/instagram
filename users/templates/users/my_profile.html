@@ -36,7 +36,7 @@
         {%if profile.bio%}
         <p>{{profile.bio}}</p>
         {%else%}
-        <p>You have no bio.<a href="{%url 'edit_profile'%}">Update</a> </p>
+        <p>You have no bio.<a href="{%url 'edit_profile'%}" >Update</a> </p>
         {%endif%}
       </div>
     </div>
@@ -94,7 +94,7 @@
             <ul class="list-group list-group-flush">
               {% for profile in following %}
               
-                <li style="width: 70%;" class="list-group-item mx-auto">
+                <li style="width: 70%;" class="list-group-item mx-auto d-flex justify-content-between">
                   {%if profile.profile_photo%}
                     <img src="{{profile.profile_photo.cdn_url}}" class="rounded-circle z-depth-0" alt="avatar image" height="35">
                   {%else%}
@@ -125,7 +125,7 @@
             <ul class="list-group list-group-flush">
               {% for profile in followers %}
               
-                <li style="width: 70%;" class="list-group-item mx-auto">
+                <li style="width: 70%;" class="list-group-item mx-auto d-flex justify-content-between">
                   {%if profile.profile_photo%}
                     <img src="{{profile.profile_photo.cdn_url}}" class="rounded-circle z-depth-0" alt="avatar image" height="35">
                   {%else%}

@@ -5,12 +5,18 @@
 {%endblock%}
 {%block content%}
 <div class="card new_image p-5">
+  <div class="text-center card-header card-header-primary">
+    <h4 class="card-title">Upload post</h4>
+  </div>
   <div class="card-body">
     <form  action="{%url 'new_post'%}" method="post" enctype="multipart/form-data">
       {%csrf_token%}
   
       {% bootstrap_form form%}
-      <input type="submit" class="btn btn-success btn-lg" value="Post">
+      <div class="text-center">
+        <input type="submit" class=" btn btn-success btn-lg" value="Post">
+      </div>
+      
     </form>
   </div>
 
