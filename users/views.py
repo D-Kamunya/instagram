@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse,HttpResponseRedirect
-from .forms import SignUpForm
+from .forms import SignUpForm,UserProfileForm,EditProfileForm
 from django.contrib.auth import login, authenticate
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
@@ -108,3 +108,28 @@ def my_profile(request):
     'posts':my_posts
   }
   return render(request, 'users/my_profile.html',context)
+
+
+
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)  # request.FILES is show the selected image or file
+
+        if form.is_valid() and profile_form.is_valid():
+            user_form = form.save()
+            custom_form = profile_form.save(False)
+            custom_form.user = user_form
+            custom_form.save()
+            return redirect('my_profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+        profile_form = UserProfileForm(instance=request.user.profile)
+        context={
+          'form':form,
+          'profile_form':profile_form,
+          'profile':request.user.profile
+        }
+        return render(request, 'users/edit_profile.html',context)

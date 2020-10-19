@@ -24,7 +24,7 @@
       <div class="col-6 bio">
         <div  class="mb-3 text-center d-flex flex-row">
             <h4 ><strong>{{profile.user.username}}</strong></h4>
-            <a href="" style="color: black;"><button type="button" class="btn btn-sm ml-2">Edit Profile</button></a>
+            <a href="{%url 'edit_profile'%}" style="color: black;"><button type="button" class="btn btn-sm ml-2">Edit Profile</button></a>
         </div>
 
         <p class="text-muted mb-3">{{profile.user.first_name}} {{profile.user.last_name}}</p>
@@ -36,7 +36,7 @@
         {%if profile.bio%}
         <p>{{profile.bio}}</p>
         {%else%}
-        <p>You have no bio.<a href="">Update</a> </p>
+        <p>You have no bio.<a href="{%url 'edit_profile'%}">Update</a> </p>
         {%endif%}
       </div>
     </div>

@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^users/not-following/$',user_views.not_following,name='not_following'),
     url(r'^users/add/following/(\d+)$',user_views.add_following,name='add_following'),
     url(r'^users/remove/following/(\d+)$',user_views.remove_following,name='remove_following'),
-    url(r'^users/my-profile/$',user_views.my_profile,name='my_profile')
+    url(r'^users/my-profile/$',user_views.my_profile,name='my_profile'),
+    url(r'^users/edit_profile/$',user_views.edit_profile, name ='edit_profile')
 ]
