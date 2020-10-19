@@ -10,16 +10,17 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div style="width: 100;" class="collapse navbar-collapse" id="navbarSupportedContent-555">
-    {%block search%}
-    <form class="form-inline mx-auto my-1">
-      <div class="md-form form-sm my-0">
-        <input class="form-control form-control-sm mr-sm-2 mb-0" type="text" placeholder="Search Post"
-          aria-label="Search">
-      </div>
-      <button class="btn  btn-md my-2 my-sm-0 ml-3" type="submit"><i class="fas fa-search"></i></button>
-    </form>
-    {%endblock%}
+  
     <ul class="navbar-nav ml-auto nav-flex-icons">
+      {%block search%}
+      <form class="form-inline mx-auto my-1">
+        <div class="md-form form-sm my-0">
+          <input class="form-control form-control-sm mr-sm-2 mb-0" type="text" placeholder="Search Post"
+            aria-label="Search">
+        </div>
+        <button class="btn  btn-sm ml-1" type="submit"><i class="fas fa-search"></i></button>
+      </form>
+      {%endblock%}
       <li class="nav-item ">
         <a class="nav-link" href="{%url 'home_page'%}"><i class="fas fa-home"></i>
         </a>
@@ -37,10 +38,10 @@
           aria-haspopup="true" aria-expanded="false">
           {%if profile.profile_photo%}
           <img src="{{profile.profile_photo.cdn_url}}" onerror="this.onerror=null;this.src='https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png';" class="rounded-circle z-depth-0"
-            alt="avatar image" height="35">
+            alt="avatar image" height="28" width="28">
           {%else%}
           <img src="https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" class="rounded-circle z-depth-0"
-          alt="avatar image" height="35">
+          alt="avatar image" height="28" width="28">
           {%endif%}  
         </a>
         <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"

@@ -2,6 +2,9 @@
   font-weight: 600;
   font-family: "Tangerine";
 }
+.dropdown-menu a{
+  font-family:'Sintony', sans-serif;
+}
 @media (min-width: 992px){
   .navbar-expand-lg{
     padding-left: 15vw;
