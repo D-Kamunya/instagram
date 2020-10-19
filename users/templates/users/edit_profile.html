@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{% load bootstrap3 %} {% load static%}
+{%block title%}
+{{profile_form.media }}
+{%endblock%}
+{%block content%}
+<div class="card new_image p-5">
+  <div class="card-body">
+    <form  action="{%url 'edit_profile'%}" method="post" enctype="multipart/form-data">
+      {%csrf_token%}
+  
+      {% bootstrap_form form%}
+      {% bootstrap_form profile_form%}
+      <input type="submit" class="btn btn-success btn-lg" value="UPDATE">
+    </form>
+  </div>
+
+</div>
+ 
+
+ {%endblock%}
