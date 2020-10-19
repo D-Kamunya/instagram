@@ -88,7 +88,11 @@ def  add_following(request,follow_id):
   Follow.objects.add_follower(request.user, following_user)
   return redirect('not_following')
 
-
+@login_required(login_url='/accounts/login/')
+def remove_following(request,follow_id):
+  following_user=User.objects.get(pk=follow_id)
+  Follow.objects.remove_follower(request.user, following_user)
+  return redirect('my_profile')
 
 @login_required(login_url='/accounts/login/')
 def my_profile(request):

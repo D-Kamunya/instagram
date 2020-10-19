@@ -3,8 +3,8 @@
   margin-top: 3rem;
 }
 
-.new_image label:nth-child(2){
-  display: none;
+label{
+  margin-right: 3px;
 }
 .posts .image{
   position: relative;

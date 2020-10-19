@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^logout/$', views.logout, {"next_page": '/'}),
     url(r'^users/not-following/$',user_views.not_following,name='not_following'),
     url(r'^users/add/following/(\d+)$',user_views.add_following,name='add_following'),
+    url(r'^users/remove/following/(\d+)$',user_views.remove_following,name='remove_following'),
     url(r'^users/my-profile/$',user_views.my_profile,name='my_profile')
 ]

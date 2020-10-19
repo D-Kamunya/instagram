@@ -102,7 +102,7 @@
                   {%endif%}
                   <a class="text-dark" href=""><b class="ml-5">{{ profile.user.username }}</b></a>
                   <small class="float-right">
-                      <a class='peach-gradient unfollow-btn btn btn-md mr-2' href="">Unfollow</a>
+                      <a class='peach-gradient unfollow-btn btn btn-md mr-2' href="/users/remove/following/{{profile.user_id}}">Unfollow</a>
                   </small>
                 </li>
               {% endfor %}
@@ -134,7 +134,7 @@
                   <a class="text-dark" href=""><b class="ml-5">{{ profile.user.username }}</b></a>
                   {%if profile in following%}
                   <small class="float-right">
-                      <a class='peach-gradient unfollow-btn btn btn-md mr-2' href="">Unfollow</a>
+                      <a class='peach-gradient unfollow-btn btn btn-md mr-2' href="/users/remove/following/{{profile.user_id}}">Unfollow</a>
                   </small>
                   {%else%}
                   <small class="float-right">
