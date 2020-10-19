@@ -1,9 +1,4 @@
-@media (min-width: 992px){
-  .instagram-body{
-    padding-left: 7vw;
-    padding-right: 7vw;
-  }
-}
+
 .instagram-body{
   margin-top: 3rem;
 }
@@ -11,10 +6,43 @@
 .new_image label:nth-child(2){
   display: none;
 }
-
+.posts .image{
+  position: relative;
+}
 .follow-btn{
   color: rgb(247, 119, 83);
   background-color: transparent !important;
   border: 2px solid rgb(247, 119, 83) !important;
   border-radius: 10rem;
+}
+.unfollow-btn{
+  border-radius: 10rem;
+}
+.posts .details{
+  display: grid;
+  position: absolute;
+  bottom: 40%;
+  left: 20%;
+  font-size: 24px;
+  width: 60%;
+  opacity: 0;
+  color: #fff;
+  transition: 0.8s ease;
+  /* text-align: center; */
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.39));
+}
+.posts a.post:hover .details{
+  opacity: 1;
+}
+.posts a.post {
+  height: 160px;
+  display: inline-block;
+  overflow: hidden;
+  box-shadow: none;
+}
+@media (min-width: 992px){
+  .instagram-body{
+    padding-left: 7vw;
+    padding-right: 7vw;
+  }
 }

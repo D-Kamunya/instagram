@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from .models import Profile
+from feed.models import Image
 from django.contrib.auth.models import User
 from friendship.models import Friend, Follow, Block
 # Create your views here.
@@ -20,6 +21,33 @@ def get_not_following(request):
     if profile.user.id not in following_id:
       not_following.append(profile)
   return not_following
+
+
+@login_required(login_url='/accounts/login/')
+def get_following(request):
+  all_profiles=Profile.get_all_profiles(request.user)
+  following=Follow.objects.following(request.user)
+  following_id=[]
+  for followin in following:
+    following_id.append(followin.id)
+  following=[]
+  for profile in all_profiles:
+    if profile.user.id in following_id:
+      following.append(profile)
+  return following 
+
+@login_required(login_url='/accounts/login/')
+def get_followers(request):
+  all_profiles=Profile.get_all_profiles(request.user)
+  followers=Follow.objects.followers(request.user)
+  followers_id=[]
+  for follower in followers:
+    followers_id.append(follower.id)
+  followers=[]
+  for profile in all_profiles:
+    if profile.user.id in followers_id:
+      followers.append(profile)
+  return followers    
 
 
 
@@ -65,7 +93,14 @@ def  add_following(request,follow_id):
 @login_required(login_url='/accounts/login/')
 def my_profile(request):
   profile=request.user.profile
+  following=get_following(request)
+  followers=get_followers(request)
+  my_posts=Image.filter_by_userid(request.user.id)
+ 
   context={
-    'profile':profile
+    'profile':profile,
+    'following':following,
+    'followers':followers,
+    'posts':my_posts
   }
   return render(request, 'users/my_profile.html',context)

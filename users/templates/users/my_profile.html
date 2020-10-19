@@ -1,0 +1,168 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block styles%}
+{{block.super}}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{%endblock%}
+{%block content%}
+<div class="profile mt-5">
+
+    <!-- Background color -->
+  
+    <!-- Avatar -->
+    <div class="row no-gutters mx-auto" style="width: 80%;">
+      <div class="col-6 avatarr mx-auto white">
+        {%if profile.profile_photo%}
+        <img src="{{profile.profile_photo.cdn_url}}" onerror="this.onerror=null;this.src='https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png';" class="rounded-circle"
+          alt="avatar image">
+        {%else%}
+        <img src="https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" class="rounded-circle"
+        alt="avatar image">
+        {%endif%}  
+      </a>
+      </div>
+      <div class="col-6 bio">
+        <div  class="mb-3 text-center d-flex flex-row">
+            <h4 ><strong>{{profile.user.username}}</strong></h4>
+            <a href="" style="color: black;"><button type="button" class="btn btn-sm ml-2">Edit Profile</button></a>
+        </div>
+
+        <p class="text-muted mb-3">{{profile.user.first_name}} {{profile.user.last_name}}</p>
+        <div class="mb-3 text-center d-flex justify-content-between">
+          <span><strong>{{posts | length}} posts</strong></span>
+          <span><strong>{{following | length}} following</strong></span>
+          <span><strong>{{followers | length}} followers</strong></span>
+        </div>
+        {%if profile.bio%}
+        <p>{{profile.bio}}</p>
+        {%else%}
+        <p>You have no bio.<a href="">Update</a> </p>
+        {%endif%}
+      </div>
+    </div>
+    
+  
+    <!-- Content -->
+    <div class="card-body text-center">
+      <!-- Name -->
+      
+      <hr>
+
+      <div class="profile-details mt-4">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item mx-auto">
+            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts"
+              aria-selected="true"><span class="badge badge-pill badge-default mr-2">{{posts | length}}</span> Posts</a>
+          </li>
+          <li class="nav-item mx-auto">
+            <a class="nav-link" id="following-tab" data-toggle="tab" href="#following" role="tab" aria-controls="following"
+              aria-selected="false"><span class="badge badge-pill badge-default mr-2">{{following | length}}</span>Following</a>
+          </li>
+          <li class="nav-item mx-auto">
+            <a class="nav-link" id="followers-tab" data-toggle="tab" href="#followers" role="tab" aria-controls="followers"
+              aria-selected="false"><span class="badge badge-pill badge-default mr-2">{{followers | length}}</span>Followers</a>
+          </li>
+        </ul>
+        <div class="tab-content mt-3" id="myTabContent">
+          <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+            <div class="posts row">
+              {%if posts%}
+              {%for post in posts%}
+              <div class="mx-auto mb-2 col-md-4 col-lg-3 col-sm-12">
+                <a class="post" href="{{post.image_path.cdn_url}}">
+                  <img style="min-height:160px ;" class="image img-fluid" src="{{post.image_path.cdn_url}}">
+                  <span class="d-flex justify-content-between details">
+                    <span ><i class="mr-1 far fa-heart"></i>{{post.likes}}</span><br>
+                    <span><i class="far fa-comment mr-1"></i>{{post.comments}}</span>
+                  </span>
+                </a>
+              </div>
+              {%endfor%}
+              {%else%}
+              <!-- Card -->
+              <div class="card col-4 mx-auto">
+                <div class="card-body">
+                  <p class="card-text">You have not uploaded any post</p>
+                  <a href="{%url 'new_post'%}" class="btn btn-primary">CREATE POST</a>
+                </div>
+              </div>
+              {%endif%}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="following" role="tabpanel" aria-labelledby="following-tab">
+            {%if following%}
+            <ul class="list-group list-group-flush">
+              {% for profile in following %}
+              
+                <li style="width: 70%;" class="list-group-item mx-auto">
+                  {%if profile.profile_photo%}
+                    <img src="{{profile.profile_photo.cdn_url}}" class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                  {%else%}
+                    <img src="https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                  {%endif%}
+                  <a class="text-dark" href=""><b class="ml-5">{{ profile.user.username }}</b></a>
+                  <small class="float-right">
+                      <a class='peach-gradient unfollow-btn btn btn-md mr-2' href="">Unfollow</a>
+                  </small>
+                </li>
+              {% endfor %}
+            </ul>
+            {%else%}
+            <div class="row">
+              <div class="card col-4 mx-auto">
+                <div class="card-body">
+                  <p class="card-text">You are not following anybody</p>
+                  <a href="{%url 'not_following'%}" class="btn btn-primary">EXPLORE USERS</a>
+                </div>
+              </div>
+            </div>
+            
+            {%endif%}
+          </div>
+          
+          <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
+            {%if followers%}
+            <ul class="list-group list-group-flush">
+              {% for profile in followers %}
+              
+                <li style="width: 70%;" class="list-group-item mx-auto">
+                  {%if profile.profile_photo%}
+                    <img src="{{profile.profile_photo.cdn_url}}" class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                  {%else%}
+                    <img src="https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                  {%endif%}
+                  <a class="text-dark" href=""><b class="ml-5">{{ profile.user.username }}</b></a>
+                  {%if profile in following%}
+                  <small class="float-right">
+                      <a class='peach-gradient unfollow-btn btn btn-md mr-2' href="">Unfollow</a>
+                  </small>
+                  {%else%}
+                  <small class="float-right">
+                    <a class='follow-btn btn btn-md mr-2' href="{%url 'not_following'%}">Follow</a>
+                  </small>
+                  {%endif%}
+                </li>
+              {% endfor %}
+            </ul>
+            {%else%}
+            <div class="row">
+              <div class="card col-4 mx-auto">
+                <div class="card-body">
+                  <p class="card-text">You are don't have any followers</p>
+                  <a href="{%url 'not_following'%}" class="btn btn-primary">EXPLORE USERS</a>
+                </div>
+              </div>
+            </div>
+            
+            {%endif%}
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  
+</div>
+                                     
+  
+{%endblock%}
