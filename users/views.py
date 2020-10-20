@@ -9,6 +9,20 @@ from feed.models import Image
 from django.contrib.auth.models import User
 from friendship.models import Friend, Follow, Block
 # Create your views here.
+
+@login_required(login_url='/accounts/login/')
+def new_user(request):
+  user_bio=request.user.profile.bio
+  user_profile_photo=request.user.profile.bio
+  user_posts=Image.filter_by_userid(request.user.id)
+  user_following=Follow.objects.following(request.user)
+  if (len(user_bio)==0) and (len(user_profile_photo)==0) and (len(user_posts)==0) and (len(user_following)==0):
+    return True
+  else:
+    return False  
+
+
+
 @login_required(login_url='/accounts/login/')
 def get_not_following(request):
   all_profiles=Profile.get_all_profiles(request.user)
@@ -78,7 +92,6 @@ def not_following(request):
     'profile':prof,
     'not_following':not_following_profiles
   }
-  print(not_following_profiles)
   return render(request, 'users/not_following.html', context) 
 
 

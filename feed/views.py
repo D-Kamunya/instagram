@@ -32,7 +32,8 @@ def home_page(request):
     'all_posts':all_posts,
     'following_posts':following_posts,
     'posts_liked':posts_liked,
-    'my_posts':my_posts
+    'my_posts':my_posts,
+    'new_user':user_views.new_user(request)
   }
   return render(request,'feed/home.html',context)
 
