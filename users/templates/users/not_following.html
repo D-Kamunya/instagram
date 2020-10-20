@@ -1,6 +1,6 @@
 {%extends 'base.html'%}
 {%block search%}
-<form action="" class="form-inline mx-auto my-1">
+<form action="{%url 'search_users'%}" class="form-inline mx-auto my-1">
   <div class="md-form form-sm my-0">
     <input class="form-control form-control-sm mr-sm-2 mb-0" name="user_name" id="user_name" type="text" placeholder="Search Username"
       aria-label="Search Username">

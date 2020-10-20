@@ -99,13 +99,13 @@ def not_following(request):
 def  add_following(request,follow_id):
   following_user=User.objects.get(pk=follow_id)
   Follow.objects.add_follower(request.user, following_user)
-  return redirect('not_following')
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='/accounts/login/')
 def remove_following(request,follow_id):
   following_user=User.objects.get(pk=follow_id)
   Follow.objects.remove_follower(request.user, following_user)
-  return redirect('my_profile')
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='/accounts/login/')
 def my_profile(request):
@@ -151,3 +151,30 @@ def edit_profile(request):
           'profile':request.user.profile
         }
         return render(request, 'users/edit_profile.html',context)
+
+
+
+@login_required(login_url='/accounts/login/')
+def search_users(request):
+
+    if 'user_name' in request.GET and request.GET["user_name"]:
+        search_term = request.GET.get("user_name")
+        users =User.objects.filter(username__icontains=search_term)
+        message = f"{search_term}"
+        following=get_following(request)
+        context={
+          "message":message,
+          "users": users,
+          'profile':request.user.profile,
+          'following':following
+        }
+        return render(request, 'search.html',context)
+
+    else:
+        message = "You haven't searched for any user"
+        context={
+          "message":message,
+          'profile':request.user.profile
+        }
+        return render(request, 'search.html',context)
+

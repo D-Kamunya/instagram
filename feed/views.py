@@ -131,7 +131,7 @@ def favourite_posts(request):
   return render(request, 'feed/favourite_posts.html',context)  
 
 
-
+@login_required(login_url='/accounts/login/')
 def search_posts(request):
 
     if 'post_name' in request.GET and request.GET["post_name"]:
