@@ -117,7 +117,7 @@ def like_post(request,post_id):
 
 def delete_post(request,post_id):
   Image.delete_image(post_id)
-  messages.warning(request,warning, f'You deleted a post ')
+  messages.warning(request, f'You deleted a post ')
   return redirect('my_profile')
 
 
