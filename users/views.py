@@ -74,7 +74,6 @@ def register_user(request):
         username = form.cleaned_data.get('username')
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password1')
-        send_welcome_email(username,email)
         user = authenticate(username=username, password=password)
         login(request, user)
         messages.success(request, f'Account for username {username} successfully created.')
