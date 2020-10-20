@@ -27,12 +27,16 @@
       <img src="{{post.image_path.cdn_url}}" width="100%" height="100%"/>
     </div>
     <div class="likes">
-      <div class="left-icons">
-      <a href="/feed/post/{{post.id}}/like/"><img src="https://image.flaticon.com/icons/svg/25/25424.svg" width="4%"/></a> 
-      <a href="#comment"><img src="https://image.flaticon.com/icons/svg/54/54916.svg" width="4%"/></a> 
-      <img src="https://image.flaticon.com/icons/svg/126/126536.svg" width="4%"/>
+      <div class="left-icons" style="float: left;">
+      {%if post in posts_liked%}
+        <a href="/feed/post/{{post.id}}/like/" ><i style="color: red;" class="fas fa-heart"></i></a> 
+      {%else%}
+        <a href="/feed/post/{{post.id}}/like/"><i class="far fa-heart"></i></a>
+      {%endif%}
+        <a href="#comment"><i class="far fa-comment"></i></a> 
+        <i class="far fa-paper-plane"></i>
       </div>
-      <img src="https://image.flaticon.com/icons/svg/25/25667.svg" width="4%"/>
+      <i class="far fa-bookmark"></i>
     </div>
     <div class="like-count">
       <p>{{post.likes}} likes</p>

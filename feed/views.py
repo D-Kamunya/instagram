@@ -7,6 +7,11 @@ from .forms import NewImageForm
 from users import views as user_views
 # Create your views here.
 
+def get_liked_posts(request):
+  liked_posts=Like.objects.filter(user=request.user)
+  return liked_posts
+
+
 @login_required(login_url='/accounts/login/')
 def home_page(request):
   following=user_views.get_following(request)
@@ -52,9 +57,15 @@ def new_post(request):
 @login_required(login_url='/accounts/login/')
 def post(request,post_id):
   post=Image.get_image_by_id(post_id)
+  posts_liked=[]
+  for like in get_liked_posts(request):
+    posts_liked.append(like.post)
+  print(posts_liked) 
+  print(post)  
   context={
     'profile':request.user.profile,
-    'post':post
+    'post':post,
+    'posts_liked':posts_liked
 
   }
   return render(request, 'feed/post.html',context)
