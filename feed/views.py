@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from users.models import Profile
 from django.db.models import F
 from .models import Image,Like
-from .forms import NewImageForm
+from .forms import NewImageForm,NewCommentForm
 from users import views as user_views
 # Create your views here.
 
@@ -61,12 +61,24 @@ def post(request,post_id):
   posts_liked=[]
   for like in get_liked_posts(request):
     posts_liked.append(like.post)
-  print(posts_liked) 
-  print(post)  
+  
+  if request.method == "POST":
+        comment_form = NewCommentForm(request.POST)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.user = request.user
+            comment.image = post
+            comment.save()
+            comment_form = NewCommentForm()
+            return redirect("post", post_id)
+  else:
+      comment_form = NewCommentForm()
   context={
     'profile':request.user.profile,
     'post':post,
-    'posts_liked':posts_liked
+    'posts_liked':posts_liked,
+    'form':comment_form
 
   }
   return render(request, 'feed/post.html',context)
@@ -86,4 +98,3 @@ def like_post(request,post_id):
     Image.objects.filter(id=post_id).update(likes=F("likes") + 1)  
 
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-

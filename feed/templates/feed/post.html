@@ -1,5 +1,6 @@
 {%extends "base.html"%}
 {%load staticfiles%}
+{% load bootstrap3 %} 
 {%block styles%}
 {{block.super}}
 <link rel="stylesheet" href="{% static 'css/post.css' %}">
@@ -73,10 +74,12 @@
     </div>
     <p style="font-size: 0.8rem" class="pl-2 text-muted">{{post.upload_date|timesince}} ago</p>
     <div id="comment" class="comment-form">
-      <form class="text-center" action="#!">
+      <form class="text-center" action="" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
         <div class="row no-gutters">
           <div class="col-10">
-            <input type="email" style="border: 0;" id="defaultLoginFormEmail" class="form-control" placeholder="Add comment">
+            <input type="hidden" id="post_id" class="" value="{{post.id}}">
+            {% bootstrap_form form%}
           </div>
           <div class="col-2">
             <input type="submit" style="border: 0;" id="defaultLoginFormEmail" class="form-control" value="Post">

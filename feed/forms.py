@@ -10,9 +10,12 @@ class NewImageForm(forms.ModelForm):
 
 
 class NewCommentForm(forms.ModelForm):
+    comment = forms.CharField(label=False, widget=forms.TextInput(attrs={"class":"form-control comment",
+                                                                         "placeholder":"Add a comment..."}))
+    class Meta:
+        model=Image_Comment
+        fields=("comment",)
 
-	class Meta:
-		model = Image_Comment
-		fields = ['comment']
+
 
         
