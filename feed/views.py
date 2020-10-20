@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
-from django.http  import HttpResponse
+from django.http  import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from users.models import Profile
-from .models import Image
+from .models import Image,Like
 from .forms import NewImageForm
 from users import views as user_views
 # Create your views here.
@@ -58,3 +58,18 @@ def post(request,post_id):
 
   }
   return render(request, 'feed/post.html',context)
+
+
+
+@login_required(login_url='/accounts/login/')
+def like_post(request,post_id):
+  post=Image.get_image_by_id(post_id)
+  user=request.user
+  like = Like.objects.filter(user=user, post=post)
+  if like:
+    like.delete()
+  else:
+    Like.objects.create(user=user,post=post)  
+
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+

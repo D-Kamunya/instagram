@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.home_page,name='home_page'),
     url(r'^feed/new/post$',views.new_post,name='new_post'),
+    url(r'^feed/post/(\d+)/like',views.like_post,name ='like_post'),
     url(r'^feed/post/(\d+)',views.post,name ='post'),
 ]
 
