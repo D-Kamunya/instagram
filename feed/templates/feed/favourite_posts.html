@@ -1,0 +1,37 @@
+{%extends "base.html"%}
+{%block content%}
+<div class="mb-3 text-center card-header card-header-primary">
+  <h4 class="card-title">Upload post</h4>
+</div>
+  {%if fav_posts%}
+
+        <div class="posts row">
+          {%for post in fav_posts%}
+          <div class="mx-auto mb-2 col-md-4 col-lg-3 col-sm-12">
+            <a class="post" href="/feed/post/{{post.id}}">
+              <img style="min-height:160px ;" class="image img-fluid" src="{{post.image_path.cdn_url}}">
+              <span class="d-flex justify-content-between details">
+                <span ><i style="color: red;" class="fas fa-heart"></i>{{post.likes}}</span><br>
+                <span><i class="far fa-comment mr-1"></i>{{post.comments}}</span>
+              </span>
+            </a>
+          </div>
+          {%endfor%}
+        </div>
+        {%else%}
+        <div class="row">
+          <div class="card mb-6 col-4 mx-auto">
+            <div class="card-body">
+              <p class="card-text">You haven't liked any post</p>
+              <a href="{%url 'home_page'%}" class="btn btn-primary">SEE OTHER POSTS</a>
+            </div>
+          </div>
+        </div>
+       
+    {%endif%}
+
+
+
+
+
+{%endblock%}
