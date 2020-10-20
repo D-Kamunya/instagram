@@ -1,0 +1,29 @@
+{%extends 'base.html'%}
+{%block content%}
+    {% if posts%}
+      <h2 class="text-center">Found {{ posts|length }} post(s) containing term {{message}} in their name</h2>
+      <div class="posts row">
+        {%for post in posts%}
+        <div class="mx-auto mb-2 col-md-4 col-lg-3 col-sm-12">
+          <a class="post" href="/feed/post/{{post.id}}">
+            <img style="min-height:160px ;" class="image img-fluid" src="{{post.image_path.cdn_url}}">
+            <span class="d-flex justify-content-between details">
+              <span >
+              {%if post in posts_liked%}
+                <i style="color: red;" class="fas fa-heart"></i>
+              {%else%}
+               <i class="far fa-heart"></i>
+              {%endif%}
+                {{post.likes}}</span><br>
+              <span><i class="far fa-comment mr-1"></i>{{post.comments}}</span>
+            </span>
+          </a>
+        </div>
+        {%endfor%}
+      </div>
+      {%elif users%}
+      {%else%}
+      <h2 class="text-center">Found 0 results containing term {{message}}</h2>
+      {%endif%}
+
+{%endblock %}

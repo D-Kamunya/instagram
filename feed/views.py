@@ -138,9 +138,22 @@ def search_posts(request):
         search_term = request.GET.get("post_name")
         images =Image.objects.filter(image_name__icontains=search_term)
         message = f"{search_term}"
-        return render(request, 'search.html',{"message":message,"images": images,"categories":get_categories(),"locations":get_locations()})
+        posts_liked=[]
+        for like in get_likes(request):
+          posts_liked.append(like.post)
+        context={
+          "message":message,
+          "posts": images,
+          'profile':request.user.profile,
+          'posts_liked':posts_liked
+        }
+        return render(request, 'search.html',context)
 
     else:
         message = "You haven't searched for any post"
-        return render(request, 'search.html',{"message":message,"images": images,"categories":get_categories(),"locations":get_locations()})
+        context={
+          "message":message,
+          'profile':request.user.profile
+        }
+        return render(request, 'search.html',context)
 
