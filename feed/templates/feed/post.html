@@ -19,7 +19,7 @@
       </div>
       {%ifequal post.profile.user_id profile.user_id%}
       <a href=""><i class="fas fa-pen"></i></a> 
-      <a href=""><i class="far fa-trash-alt"></i></a>
+      <a href="/feed/post/{{post.id}}/delete/"><i class="far fa-trash-alt"></i></a>
       {%else%}
       <img src="https://image.flaticon.com/icons/svg/149/149947.svg" width="3%" style="opacity:0.5;"/>
       {%endifequal%}

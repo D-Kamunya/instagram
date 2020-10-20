@@ -43,7 +43,7 @@ def new_post(request):
             image = form.save(commit=False)
             image.profile = current_profile
             image.save()
-        return redirect('home_page')
+        return redirect('my_profile')
 
     else:
         form = NewImageForm()
@@ -102,3 +102,9 @@ def like_post(request,post_id):
     Image.objects.filter(id=post_id).update(likes=F("likes") + 1)  
 
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+def delete_post(request,post_id):
+  Image.delete_image(post_id)
+  return redirect('my_profile')
