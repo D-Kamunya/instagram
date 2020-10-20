@@ -72,7 +72,13 @@
                 <a class="post" href="/feed/post/{{post.id}}">
                   <img style="min-height:160px ;" class="image img-fluid" src="{{post.image_path.cdn_url}}">
                   <span class="d-flex justify-content-between details">
-                    <span ><i class="mr-1 far fa-heart"></i>{{post.likes}}</span><br>
+                    <span >
+                      {%if post in posts_liked%}
+                      <i style="color: red;" class="fas fa-heart"></i>
+                    {%else%}
+                     <i class="far fa-heart"></i>
+                    {%endif%}
+                      {{post.likes}}</span><br>
                     <span><i class="far fa-comment mr-1"></i>{{post.comments}}</span>
                   </span>
                 </a>
@@ -80,7 +86,7 @@
               {%endfor%}
               {%else%}
               <!-- Card -->
-              <div class="card col-4 mx-auto">
+              <div class="card col-6 mx-auto">
                 <div class="card-body">
                   <p class="card-text">You have not uploaded any post</p>
                   <a href="{%url 'new_post'%}" class="btn btn-primary">CREATE POST</a>

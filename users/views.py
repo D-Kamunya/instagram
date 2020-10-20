@@ -96,6 +96,10 @@ def remove_following(request,follow_id):
 
 @login_required(login_url='/accounts/login/')
 def my_profile(request):
+  from feed.views import get_likes
+  posts_liked=[]
+  for like in get_likes(request):
+    posts_liked.append(like.post) 
   profile=request.user.profile
   following=get_following(request)
   followers=get_followers(request)
@@ -105,7 +109,8 @@ def my_profile(request):
     'profile':profile,
     'following':following,
     'followers':followers,
-    'posts':my_posts
+    'posts':my_posts,
+    'posts_liked':posts_liked
   }
   return render(request, 'users/my_profile.html',context)
 

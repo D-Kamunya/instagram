@@ -8,7 +8,7 @@ from .forms import NewImageForm,NewCommentForm
 from users import views as user_views
 # Create your views here.
 
-def get_liked_posts(request):
+def get_likes(request):
   liked_posts=Like.objects.filter(user=request.user)
   return liked_posts
 
@@ -16,6 +16,9 @@ def get_liked_posts(request):
 @login_required(login_url='/accounts/login/')
 def home_page(request):
   following=user_views.get_following(request)
+  posts_liked=[]
+  for like in get_likes(request):
+    posts_liked.append(like.post)
   following_posts=[]
   all_posts=Image.get_all_images()
   for post in all_posts:
@@ -28,6 +31,7 @@ def home_page(request):
     'following':following,
     'all_posts':all_posts,
     'following_posts':following_posts,
+    'posts_liked':posts_liked,
     'my_posts':my_posts
   }
   return render(request,'feed/home.html',context)
@@ -60,7 +64,7 @@ def post(request,post_id):
   post=Image.get_image_by_id(post_id)
   posts_liked=[]
   post_comments=Image_Comment.objects.filter(image=post)
-  for like in get_liked_posts(request):
+  for like in get_likes(request):
     posts_liked.append(like.post)
 
 
@@ -108,3 +112,19 @@ def like_post(request,post_id):
 def delete_post(request,post_id):
   Image.delete_image(post_id)
   return redirect('my_profile')
+
+
+
+
+@login_required(login_url='/accounts/login/')
+def favourite_posts(request):
+  posts_liked=[]
+  for like in get_likes(request):
+    posts_liked.append(like.post)
+
+
+  context={
+    'fav_posts':posts_liked
+  }  
+
+  return render(request, 'feed/favourite_posts.html',context)  

@@ -4,13 +4,29 @@
   {%if all_posts%}
       {%if following%}
         {%if following_posts%}
+        {%if following_posts|length < 4%}
+        <div class="row">
+          <div class="card mb-3 col-4 mx-auto">
+            <div class="card-body">
+              <p class="card-text">Follow more users to see more posts</p>
+              <a href="{%url 'not_following'%}" class="btn btn-primary">EXPLORE USERS</a>
+            </div>
+          </div>
+        </div>
+        {%endif%}
         <div class="posts row">
           {%for post in following_posts%}
           <div class="mx-auto mb-2 col-md-4 col-lg-3 col-sm-12">
             <a class="post" href="/feed/post/{{post.id}}">
               <img style="min-height:160px ;" class="image img-fluid" src="{{post.image_path.cdn_url}}">
               <span class="d-flex justify-content-between details">
-                <span ><i class="mr-1 far fa-heart"></i>{{post.likes}}</span><br>
+                <span >
+                  {%if post in posts_liked%}
+                  <i style="color: red;" class="fas fa-heart"></i>
+                {%else%}
+                 <i class="far fa-heart"></i>
+                {%endif%}
+                {{post.likes}}</span><br>
                 <span><i class="far fa-comment mr-1"></i>{{post.comments}}</span>
               </span>
             </a>
