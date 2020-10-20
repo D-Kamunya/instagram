@@ -129,3 +129,18 @@ def favourite_posts(request):
   }  
 
   return render(request, 'feed/favourite_posts.html',context)  
+
+
+
+def search_posts(request):
+
+    if 'post_name' in request.GET and request.GET["post_name"]:
+        search_term = request.GET.get("post_name")
+        images =Image.objects.filter(image_name__icontains=search_term)
+        message = f"{search_term}"
+        return render(request, 'search.html',{"message":message,"images": images,"categories":get_categories(),"locations":get_locations()})
+
+    else:
+        message = "You haven't searched for any post"
+        return render(request, 'search.html',{"message":message,"images": images,"categories":get_categories(),"locations":get_locations()})
+

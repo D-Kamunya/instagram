@@ -1,7 +1,15 @@
 {%extends "base.html"%}
+{%block search%}
+<form action="{% url 'search_posts' %}" class="form-inline mx-auto my-1">
+  <div class="md-form form-sm my-0">
+    <input class="form-control form-control-sm mr-sm-2 mb-0" name="post_name" id="post_name" type="text" placeholder="Search Post"
+      aria-label="Search">
+  </div>
+</form>
+{%endblock%}
 {%block content%}
 <div class="mb-3 text-center card-header card-header-primary">
-  <h4 class="card-title">Upload post</h4>
+  <h4 class="card-title">Favourite posts</h4>
 </div>
   {%if fav_posts%}
 

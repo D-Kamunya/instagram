@@ -4,6 +4,14 @@
 {{block.super}}
 <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {%endblock%}
+{%block search%}
+<form action="" class="form-inline mx-auto my-1">
+  <div class="md-form form-sm my-0">
+    <input class="form-control form-control-sm mr-sm-2 mb-0" name="user_name" id="user_name" type="text" placeholder="Search Username"
+      aria-label="Search Username">
+  </div>
+</form>
+{%endblock%}
 {%block content%}
 <div class="profile mt-5">
 
