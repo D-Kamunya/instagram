@@ -52,5 +52,9 @@ def new_post(request):
 @login_required(login_url='/accounts/login/')
 def post(request,post_id):
   post=Image.get_image_by_id(post_id)
-  print(post)
-  return redirect('home_page')
+  context={
+    'profile':request.user.profile,
+    'post':post
+
+  }
+  return render(request, 'feed/post.html',context)

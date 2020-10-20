@@ -1,0 +1,85 @@
+{%extends "base.html"%}
+{%load staticfiles%}
+{%block styles%}
+{{block.super}}
+<link rel="stylesheet" href="{% static 'css/post.css' %}">
+{%endblock%}
+{%block content%}
+<div class="card mb-5">
+    <div class="post">
+      <div class="name">
+        {%if post.profile.profile_photo%}
+        <img src="{{post.profile.profile_photo.cdn_url}}" width="5%" height="5%" class="profile-img"/>
+        {%else%}
+          <img src="https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" class="rounded-circle z-depth-0"
+          alt="avatar image" width="5%" height="5%" >
+        {%endif%}  
+        <p class="ml-3">{{post.profile.user.username}}</p>
+      </div>
+      {%ifequal post.profile.user_id profile.user_id%}
+      <a href=""><i class="fas fa-pen"></i></a> 
+      <a href=""><i class="far fa-trash-alt"></i></a>
+      {%else%}
+      <img src="https://image.flaticon.com/icons/svg/149/149947.svg" width="3%" style="opacity:0.5;"/>
+      {%endifequal%}
+    </div>
+    <div class="post-image" >
+      <img src="{{post.image_path.cdn_url}}" width="100%" height="100%"/>
+    </div>
+    <div class="likes">
+      <div class="left-icons">
+      <img src="https://image.flaticon.com/icons/svg/25/25424.svg" width="4%"/>
+      <a href="#comment"><img src="https://image.flaticon.com/icons/svg/54/54916.svg" width="4%"/></a> 
+      <img src="https://image.flaticon.com/icons/svg/126/126536.svg" width="4%"/>
+      </div>
+      <img src="https://image.flaticon.com/icons/svg/25/25667.svg" width="4%"/>
+    </div>
+    <div class="like-count">
+      <p>{{post.likes}} likes</p>
+    </div>
+    <div class="comments">
+      <div class="comment">
+        <div class="name">
+          <img src="https://randomuser.me/api/portraits/women/84.jpg" width="10%" height="10%" class="profile-img"/>
+          <p>Danielle Pierce</p>
+          <p class="ml-5" style="font-weight: normal;">Thats very nice</p>
+        </div>
+      </div>
+      <div class="comment">
+        <div class="name">
+          <img src="https://randomuser.me/api/portraits/women/84.jpg" width="10%" height="10%" class="profile-img"/>
+          <p>Danielle Pierce</p>
+          <p class="ml-5" style="font-weight: normal;">Thats very nice</p>
+        </div>
+      </div>
+      <div class="comment">
+        <div class="name">
+          <img src="https://randomuser.me/api/portraits/women/84.jpg" width="10%" height="10%" class="profile-img"/>
+          <p>Danielle Pierce</p>
+          <p class="ml-5" style="font-weight: normal;">Thats very nice</p>
+        </div>
+      </div>
+      <div class="comment">
+        <div class="name">
+          <img src="https://randomuser.me/api/portraits/women/84.jpg" width="10%" height="10%" class="profile-img"/>
+          <p>Danielle Pierce</p>
+          <p class="ml-5" style="font-weight: normal;">Thats very nice</p>
+        </div>
+      </div>
+    </div>
+    <p style="font-size: 0.8rem" class="pl-2 text-muted">14 minutes ago</p>
+    <div id="comment" class="comment-form">
+      <form class="text-center" action="#!">
+        <div class="row no-gutters">
+          <div class="col-10">
+            <input type="email" style="border: 0;" id="defaultLoginFormEmail" class="form-control" placeholder="Add comment">
+          </div>
+          <div class="col-2">
+            <input type="submit" style="border: 0;" id="defaultLoginFormEmail" class="form-control" value="Post">
+          </div>
+        </div>
+      </form>
+    </div>
+    
+  </div>  
+{%endblock%}
