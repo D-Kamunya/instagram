@@ -71,6 +71,7 @@ def post(request,post_id):
             comment.image = post
             comment.save()
             comment_form = NewCommentForm()
+            Image.objects.filter(id=post_id).update(comments=F("comments") + 1)  
             return redirect("post", post_id)
   else:
       comment_form = NewCommentForm()
