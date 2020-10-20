@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http  import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from users.models import Profile
+from django.db.models import F
 from .models import Image,Like
 from .forms import NewImageForm
 from users import views as user_views
@@ -79,8 +80,10 @@ def like_post(request,post_id):
   like = Like.objects.filter(user=user, post=post)
   if like:
     like.delete()
+    Image.objects.filter(id=post_id).update(likes=F("likes") - 1)
   else:
-    Like.objects.create(user=user,post=post)  
+    Like.objects.create(user=user,post=post)
+    Image.objects.filter(id=post_id).update(likes=F("likes") + 1)  
 
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
