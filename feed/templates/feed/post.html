@@ -27,16 +27,16 @@
       <img src="{{post.image_path.cdn_url}}" width="100%" height="100%"/>
     </div>
     <div class="likes">
-      <div class="left-icons" style="float: left;">
+      <div class="left-icons">
       {%if post in posts_liked%}
         <a href="/feed/post/{{post.id}}/like/" ><i style="color: red;" class="fas fa-heart"></i></a> 
       {%else%}
-        <a href="/feed/post/{{post.id}}/like/"><i class="far fa-heart"></i></a>
+        <a href="/feed/post/{{post.id}}/like/"><i style="color: black;" class="far fa-heart"></i></a>
       {%endif%}
-        <a href="#comment"><i class="far fa-comment"></i></a> 
+        <a style="color: black;" href="#comment"><i class="far fa-comment"></i></a> 
         <i class="far fa-paper-plane"></i>
       </div>
-      <i class="far fa-bookmark"></i>
+      <i class="far fa-bookmark align-right"></i>
     </div>
     <div class="like-count">
       <p>{{post.likes}} likes</p>
@@ -71,7 +71,7 @@
         </div>
       </div>
     </div>
-    <p style="font-size: 0.8rem" class="pl-2 text-muted">14 minutes ago</p>
+    <p style="font-size: 0.8rem" class="pl-2 text-muted">{{post.upload_date|timesince}} ago</p>
     <div id="comment" class="comment-form">
       <form class="text-center" action="#!">
         <div class="row no-gutters">
