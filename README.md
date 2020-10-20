@@ -31,8 +31,8 @@ User can like a picture and leave a comment on it.
 | User clicks unfollow button     | User starts unfollowing that user   | User is removed from following|
 
 
-![alt text](static/img/instahome)
-![alt text](static/img/instafollowing)
+![alt text](static/img/instahome.png)
+![alt text](static/img/instafollow.png)
 ![alt text](static/img/instaprof.png)
 
 
