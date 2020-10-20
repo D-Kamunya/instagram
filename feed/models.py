@@ -76,3 +76,8 @@ class Image(models.Model):
       images=cls.objects.filter(profile__user_id=user_id)
       return images
 
+
+
+class Like(models.Model):
+	user = models.ForeignKey(User,on_delete=models.CASCADE)
+	post = models.ForeignKey(Image,on_delete=models.CASCADE)
