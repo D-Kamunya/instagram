@@ -7,7 +7,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile
 from feed.models import Image
 from django.contrib.auth.models import User
-from friendship.models import Friend, Follow, Block
+from friendship.models import Friend, Follow,Block 
+from django.contrib import messages
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
@@ -76,6 +77,7 @@ def register_user(request):
         send_welcome_email(username,email)
         user = authenticate(username=username, password=password)
         login(request, user)
+        messages.success(request, f'Account for username {username} successfully created.')
         return redirect('home_page')
   else:
       form = SignUpForm() 
@@ -99,12 +101,14 @@ def not_following(request):
 def  add_following(request,follow_id):
   following_user=User.objects.get(pk=follow_id)
   Follow.objects.add_follower(request.user, following_user)
+  messages.success(request, f'Started following {Profile.get_profile_by_userid(following_user).user.username} ')
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='/accounts/login/')
 def remove_following(request,follow_id):
   following_user=User.objects.get(pk=follow_id)
   Follow.objects.remove_follower(request.user, following_user)
+  messages.success(request, f'Stopped following {Profile.get_profile_by_userid(following_user).user.username} ')
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='/accounts/login/')
@@ -141,6 +145,7 @@ def edit_profile(request):
             custom_form = profile_form.save(False)
             custom_form.user = user_form
             custom_form.save()
+            messages.success(request, f'Profile updated successfully')
             return redirect('my_profile')
     else:
         form = EditProfileForm(instance=request.user)

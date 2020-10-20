@@ -6,6 +6,7 @@ from django.db.models import F
 from .models import Image,Like,Image_Comment
 from .forms import NewImageForm,NewCommentForm
 from users import views as user_views
+from django.contrib import messages
 # Create your views here.
 
 def get_likes(request):
@@ -48,6 +49,7 @@ def new_post(request):
             image = form.save(commit=False)
             image.profile = current_profile
             image.save()
+            message.success(request, f'Post successfully uploaded')
         return redirect('my_profile')
 
     else:
@@ -79,6 +81,7 @@ def post(request,post_id):
             comment.save()
             comment_form = NewCommentForm()
             Image.objects.filter(id=post_id).update(comments=F("comments") + 1)  
+            messages.success(request, f'Comment successfully added')
             return redirect("post", post_id)
   else:
       comment_form = NewCommentForm()
@@ -103,16 +106,18 @@ def like_post(request,post_id):
   if like:
     like.delete()
     Image.objects.filter(id=post_id).update(likes=F("likes") - 1)
+    messages.success(request, f'Removed {post.image_name} from favourites')
   else:
     Like.objects.create(user=user,post=post)
     Image.objects.filter(id=post_id).update(likes=F("likes") + 1)  
-
+    messages.success(request, f'You liked post {post.image_name} ')
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 
 def delete_post(request,post_id):
   Image.delete_image(post_id)
+  messages.warning(request,warning, f'You deleted a post ')
   return redirect('my_profile')
 
 
