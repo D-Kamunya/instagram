@@ -40,6 +40,9 @@ label{
   overflow: hidden;
   box-shadow: none;
 }
+.hidden-comments,#view-less-comments{
+  display:none
+}
 @media (min-width: 992px){
   .instagram-body{
     padding-left: 7vw;

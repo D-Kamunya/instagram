@@ -43,34 +43,65 @@
       <p>{{post.likes}} likes</p>
     </div>
     <div class="comments">
+      {%if comments%}
+        {%if comments|length > 3 %}
+          {%for comment in comments|slice:"0:3"%}
+          <div class="comment">
+            <div class="name">
+              {%if comment.profile.profile_path %}
+              <img src="{{comment.profile.profile_path.cdn_url}}" width="5%" height="5%" class="profile-img"/>
+              {%else%}
+              <img src="https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" class="rounded-circle z-depth-0"
+              alt="avatar image" width="5%" height="5%">
+              {%endif%}  
+              <p class="ml-3">{{comment.profile.user.username}}</p>
+              <p class="ml-5" style="font-weight: normal;">{{comment.comment}}</p>
+            </div>
+          </div>
+          {%endfor%}
+          <div id="hidden-comments" class="hidden-comments">
+          {%for comment in comments|slice:"3:"%}
+          <div class="comment">
+            <div class="name">
+              {%if comment.profile.profile_path %}
+              <img src="{{comment.profile.profile_path.cdn_url}}" width="5%" height="5%" class="profile-img"/>
+              {%else%}
+              <img src="https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" class="rounded-circle z-depth-0"
+              alt="avatar image" width="5%" height="5%">
+              {%endif%}  
+              <p class="ml-3">{{comment.profile.user.username}}</p>
+              <p class="ml-5" style="font-weight: normal;">{{comment.comment}}</p>
+            </div>
+          </div>
+          {%endfor%}
+          </div>
+          <p class="ml-3 text-muted" id="view-all-comments" style="font-weight: normal;">View all {{post.comments}} comments</p>
+          <p class="ml-3 text-muted" id="view-less-comments" style="font-weight: normal;">View less comments</p>
+        {%else%}
+        {%for comment in comments%}
+        <div class="comment">
+          <div class="name">
+            {%if comment.profile.profile_path %}
+            <img src="{{comment.profile.profile_path.cdn_url}}" width="5%" height="5%" class="profile-img"/>
+            {%else%}
+            <img src="https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" class="rounded-circle z-depth-0"
+            alt="avatar image" width="5%" height="5%">
+            {%endif%}  
+            <p class="ml-3">{{comment.profile.user.username}}</p>
+            <p class="ml-5" style="font-weight: normal;">{{comment.comment}}</p>
+          </div>
+        </div>
+        {%endfor%}
+        {%endif%}
+  
+      {%else%}
       <div class="comment">
         <div class="name">
-          <img src="https://randomuser.me/api/portraits/women/84.jpg" width="10%" height="10%" class="profile-img"/>
-          <p>Danielle Pierce</p>
-          <p class="ml-5" style="font-weight: normal;">Thats very nice</p>
+          <p>No comments</p>
         </div>
       </div>
-      <div class="comment">
-        <div class="name">
-          <img src="https://randomuser.me/api/portraits/women/84.jpg" width="10%" height="10%" class="profile-img"/>
-          <p>Danielle Pierce</p>
-          <p class="ml-5" style="font-weight: normal;">Thats very nice</p>
-        </div>
-      </div>
-      <div class="comment">
-        <div class="name">
-          <img src="https://randomuser.me/api/portraits/women/84.jpg" width="10%" height="10%" class="profile-img"/>
-          <p>Danielle Pierce</p>
-          <p class="ml-5" style="font-weight: normal;">Thats very nice</p>
-        </div>
-      </div>
-      <div class="comment">
-        <div class="name">
-          <img src="https://randomuser.me/api/portraits/women/84.jpg" width="10%" height="10%" class="profile-img"/>
-          <p>Danielle Pierce</p>
-          <p class="ml-5" style="font-weight: normal;">Thats very nice</p>
-        </div>
-      </div>
+      {%endif%}
+   
     </div>
     <p style="font-size: 0.8rem" class="pl-2 text-muted">{{post.upload_date|timesince}} ago</p>
     <div id="comment" class="comment-form">
@@ -89,4 +120,21 @@
     </div>
     
   </div>  
+{%endblock%}
+{%block scripts%}
+<script>
+  $(document).ready(()=>{
+    $('#view-all-comments').click(()=>{
+      $('#hidden-comments').toggle()
+      $('#view-less-comments').toggle()
+      $('#view-all-comments').hide()
+    })
+    $('#view-less-comments').click(()=>{
+      $('#hidden-comments').toggle()
+      $('#view-less-comments').toggle()
+      $('#view-all-comments').show()
+    })
+  })
+</script>
+
 {%endblock%}
