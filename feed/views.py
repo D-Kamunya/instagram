@@ -49,7 +49,7 @@ def new_post(request):
             image = form.save(commit=False)
             image.profile = current_profile
             image.save()
-            message.success(request, f'Post successfully uploaded')
+            messages.success(request, f'Post successfully uploaded')
         return redirect('my_profile')
 
     else:
