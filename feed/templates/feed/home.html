@@ -13,7 +13,7 @@
     <div class="row">
       <div class="card mb-3 col-4 mx-auto">
         <div class="card-body">
-          <p class="card-text">Follow more users to only their posts</p>
+          <p class="card-text">Follow more users to see only their posts</p>
           <a href="{%url 'not_following'%}" class="btn btn-primary">EXPLORE USERS</a>
         </div>
       </div>
@@ -50,19 +50,19 @@
       {%endfor%}
     </div>
   {%else%}
-  {%if all_posts%}
+    {%if all_posts%}
       {%if following%}
         {%if following_posts%}
-        {%if following_posts|length < 4%}
-        <div class="row">
-          <div class="card mb-3 col-4 mx-auto">
-            <div class="card-body">
-              <p class="card-text">Follow more users to see more posts</p>
-              <a href="{%url 'not_following'%}" class="btn btn-primary">EXPLORE USERS</a>
+          {%if following_posts|length < 4%}
+          <div class="row">
+            <div class="card mb-3 col-4 mx-auto">
+              <div class="card-body">
+                <p class="card-text">Follow more users to see more posts</p>
+                <a href="{%url 'not_following'%}" class="btn btn-primary">EXPLORE USERS</a>
+              </div>
             </div>
           </div>
-        </div>
-        {%endif%}
+          {%endif%}
         <div class="posts row">
           {%for post in following_posts%}
           <div class="mx-auto mb-2 col-md-4 col-lg-3 col-sm-12">
@@ -123,7 +123,7 @@
       <div class="posts row">
         {%for post in all_posts%}
         <div class="mx-auto mb-2 col-md-4 col-lg-3 col-sm-12">
-          <a class="post" href="{{post.image_path.cdn_url}}">
+          <a class="post" href="/feed/post/{{post.id}}">
             <img style="min-height:160px ;" class="image img-fluid" src="{{post.image_path.cdn_url}}">
             <span class="d-flex justify-content-between details">
               <span >
